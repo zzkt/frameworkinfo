@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import subprocess
 import shutil
 
-# depends on dmidecode, lshw
+# depends on pciutils, dmidecode, lshw
 
 def check_installed(program):
     return shutil.which(program)
@@ -13,7 +13,7 @@ if check_installed("dmidecode"):
     system_info = subprocess.check_output("sudo dmidecode | grep -A7 'System Information'", shell=True)
 else:
     print("dmidecode is not installed")
-    
+
 if check_installed("lshw"):
     cpu_info = subprocess.check_output("sudo lshw -C cpu | grep -A3 'product:'", shell=True)
 else:
@@ -24,7 +24,7 @@ if check_installed("uname"):
 else:
     print("uname is not installed")
 
-    
+
 # Print outout to shell
 print(f"{system_info.decode()}")
 print(f"BIOS info:\n{bios_info.decode()}")
