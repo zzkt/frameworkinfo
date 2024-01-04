@@ -1,0 +1,3 @@
+* framework info
+
+A simple script to show various hardware features (specifically for the framework 13  laptop)
