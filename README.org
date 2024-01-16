@@ -1,3 +1,30 @@
 * framework info
 
 A simple script to show various hardware features (specifically for the framework 13  laptop)
+
+example output…
+
+#+BEGIN_SRC text
+System Information
+	Manufacturer: Framework
+	Product Name: Laptop 13 (AMD Ryzen 7040Series)
+	Version: A7
+	Serial Number: FRANDGCPA700000000
+	UUID: 74716383-b405-4ec1-8928-66d42beaf51e
+	Wake-up Type: Power Switch
+	SKU Number: FRANDGCP07
+
+BIOS info:
+	Vendor: INSYDE Corp.
+	Version: 03.03
+	Release Date: 10/17/2023
+	Address: 0xE0000
+
+CPU info:
+       product: AMD Ryzen 7 7840U w/ Radeon  780M Graphics
+       vendor: Advanced Micro Devices [AMD]
+       physical id: 4
+       bus info: cpu@0
+
+Kernel version: 6.6.7
+#+END_SRC
