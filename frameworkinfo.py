@@ -7,10 +7,10 @@ import shutil
 def check_installed(program):
     return shutil.which(program)
 
-bios_info = "Not found"
-system_info = "Not found"
-cpu_info = "Not found"
-kernel_version = "Not found"
+bios_info = False
+system_info = False
+cpu_info = False
+kernel_version = False
 
 # Run the commands and store their output in variables
 try:
@@ -34,7 +34,22 @@ except subprocess.CalledProcessError:
 
 # Print outout to shell
 
-print(f"{system_info.decode()}")
-print(f"BIOS info:\n{bios_info.decode()}")
-print(f"CPU info:\n{cpu_info.decode()}")
-print(f"Kernel version: {kernel_version.decode()}")
+if system_info:
+    print(f"{system_info.decode()}")
+else:
+    print("dmidecode is not installed")
+
+if bios_info:
+    print(f"BIOS info:\n{bios_info.decode()}")
+else:
+    print("dmidecode is not installed")
+
+if cpu_info:
+    print(f"CPU info:\n{cpu_info.decode()}")
+else:
+    print("lshw is not installed")
+
+if kernel_version:
+    print(f"Kernel version: {kernel_version.decode()}")
+else:
+    print("uname is not installed")
