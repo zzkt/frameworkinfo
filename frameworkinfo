@@ -22,7 +22,7 @@ except subprocess.CalledProcessError:
 
 try:
     if check_installed("lshw"):
-        print(f"CPU info:\n{subprocess.check_output(cpu_info, shell=True)}")
+        print(f"CPU info:\n{subprocess.check_output(cpu_info, shell=True).decode()}")
 except subprocess.CalledProcessError:
     print("lshw is not installed")
 
