@@ -3,53 +3,31 @@ import subprocess
 import shutil
 
 # depends on pciutils, dmidecode, lshw
-
 def check_installed(program):
     return shutil.which(program)
 
-bios_info = False
-system_info = False
-cpu_info = False
-kernel_version = False
+# commands for info gleaning
+bios_info = "sudo dmidecode | grep -A3 'Vendor:'"
+system_info = "sudo dmidecode | grep -A7 'System Information'"
+cpu_info = "sudo lshw -C cpu | grep -A3 'product:'"
+kernel_version = "uname -r"
 
-# Run the commands and store their output in variables
+# print to console
 try:
     if check_installed("dmidecode"):
-        bios_info = subprocess.check_output("sudo dmidecode | grep -A3 'Vendor:'", shell=True)
-        system_info = subprocess.check_output("sudo dmidecode | grep -A7 'System Information'", shell=True)
+        print(subprocess.check_output(system_info,shell=True).decode())
+        print(f"BIOS info:\n {subprocess.check_output(bios_info, shell=True).decode()}")
 except subprocess.CalledProcessError:
     print("dmidecode is not installed")
 
 try:
     if check_installed("lshw"):
-        cpu_info = subprocess.check_output("sudo lshw -C cpu | grep -A3 'product:'", shell=True)
+        print(f"CPU info:\n{subprocess.check_output(cpu_info, shell=True)}")
 except subprocess.CalledProcessError:
     print("lshw is not installed")
 
 try:
     if check_installed("uname"):
-        kernel_version = subprocess.check_output("uname -r", shell=True)
+        print(f"Kernel version: {subprocess.check_output(kernel_version, shell=True).decode()}")
 except subprocess.CalledProcessError:
-    print("uname is not installed")
-
-# Print outout to shell
-
-if system_info:
-    print(f"{system_info.decode()}")
-else:
-    print("dmidecode is not installed")
-
-if bios_info:
-    print(f"BIOS info:\n{bios_info.decode()}")
-else:
-    print("dmidecode is not installed")
-
-if cpu_info:
-    print(f"CPU info:\n{cpu_info.decode()}")
-else:
-    print("lshw is not installed")
-
-if kernel_version:
-    print(f"Kernel version: {kernel_version.decode()}")
-else:
     print("uname is not installed")
